@@ -4,7 +4,7 @@ const User = require('../models/user');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
 
-async function signupUser({ fullName, username, email, password }) {
+async function signupUser({ firstName, lastName, mobile, email, password, countryCode }) {
   const existingUser = await User.findOne({ email });
   if (existingUser) {
     throw new Error('User already exists');
@@ -12,7 +12,7 @@ async function signupUser({ fullName, username, email, password }) {
 
   const passwordHash = await bcrypt.hash(password, 10);
 
-  const newUser = new User({ fullName, username, email, passwordHash });
+  const newUser = new User({ firstName, lastName, mobile,  email, passwordHash, countryCode });
   await newUser.save();
 
   return newUser;
