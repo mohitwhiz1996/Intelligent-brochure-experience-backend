@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const authRoutes = require('../src/routes/auth');
 const userRoutes = require('../src/routes/user');
 const brochureRoute = require('../src/routes/brochure');
+const uploadRoutes = require('../src/routes/upload');
 const mongoose = require('mongoose');
 const app = express();
 
@@ -44,4 +45,5 @@ app.listen(PORT, () => {
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/brochure', brochureRoute);
+app.use('/api/upload', uploadRoutes);
 module.exports = app;
