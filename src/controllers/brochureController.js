@@ -68,7 +68,18 @@ async function getBrosure(req, res) {
   }
 }
 
+async function deleteBrosure(req, res) {
+  try {
+    let brochureData= await Brochure.findOneAndDelete(req.params.id)
+    sendSuccess(res);
+  } catch (err) {
+    console.log(err)
+    sendError(res);
+  }
+}
+
 module.exports = {
   createBrosure,
-  getBrosure
+  getBrosure,
+  deleteBrosure
 };

@@ -5,5 +5,6 @@ const brochureController = require('../controllers/brochureController');
 
 router.post('/', authenticateToken, brochureController.createBrosure);
 router.get('/', authenticateToken, brochureController.getBrosure);
+router.delete('/:id', authenticateToken, brochureController.deleteBrosure);
 
 module.exports = router;
