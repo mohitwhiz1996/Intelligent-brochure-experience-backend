@@ -21,20 +21,20 @@ async function createBrosure(req, res) {
       }
     });
 
-    // Step 1: Analyze images with AI
+    //Step 1: Analyze images with AI
     const aiDescriptions = await analyzeImagesWithAI(validUrls);
 
     // Step 2: Enhance title and description
     const enhancedContent = await analyzeAllImagesTogether(title, description);
 
     // Step 3: Final optimization - combine everything for best brochure layout
-    const finalContent = await finalizeBrochureContent(enhancedContent, aiDescriptions);
+     const finalContent = await finalizeBrochureContent(enhancedContent, aiDescriptions);
     finalContent.imageLayout[0].description = finalContent.finalDescription
-    await Brochure.create({
+    let result = await Brochure.create({
         userId: req.userId,
         title, description, imageURLs: validUrls, aiResponse: finalContent
     })
-    sendSuccess(res, { finalContent });
+    sendSuccess(res, { finalContent, id: result._id});
   } catch (err) {
     sendError(res);
   }
